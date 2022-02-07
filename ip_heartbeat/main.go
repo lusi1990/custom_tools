@@ -6,14 +6,13 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"strings"
 	"time"
 )
 
 func ip(w http.ResponseWriter, req *http.Request) {
-
-	fmt.Println(req.RemoteAddr)
-	fmt.Fprintf(w, "%s", strings.TrimSpace(req.RemoteAddr))
+	ipStr := fmt.Sprintf("remote addr:%s; X-Real-IP:%s;", req.RemoteAddr, req.Header.Get("X-Real-IP"))
+	fmt.Println(ipStr)
+	fmt.Fprintf(w, "%s", ipStr)
 }
 
 func main() {
